@@ -58,10 +58,14 @@ export default function Consultar(){
 
             <h2>Bem-Vindo {token?.usuario}</h2>
 
+            <section>
+
             <button onClick={sair}>Sair</button>
 
             <button onClick={buscar}>{exib ? 'Ocultar' : 'Exibir'}</button>
-            <button><Link to={'/cadastrar'}>Cadastrar</Link></button>
+            <button className='cds'><Link to={'/cadastrar'}>Cadastrar nota</Link></button>
+
+            </section>
 
             <table>
                 <thead>

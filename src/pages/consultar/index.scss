@@ -1,8 +1,38 @@
 .pagina-consultar {
     padding: 50px;
 
+    section{
+
+        padding-top: 2%;
+
+        .cds{
+    
+            background-color: #1a2036;
+            border-style: none;
+            border-radius: 12px;
+            padding: 10px;
+            margin-left: 80%;
+    
+            a{
+                color: #fff; 
+            }   
+            
+        }
+
+        .cds:hover{
+
+            font: 500 14px 'Noto Sans';
+            background-color: #262f4e;
+            transition: all 60ms;
+
+        }
+
+    }
+
+    
 
     table {
+        margin-top: 3%;
         width: 1200px;
 
         th {
