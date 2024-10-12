@@ -56,7 +56,7 @@ export default function Consultar(){
 
         <div className='pagina-consultar'>
 
-            <h2>Bem-Vindo {token?.nome}</h2>
+            <h2>Bem-Vindo {token?.usuario}</h2>
 
             <button onClick={sair}>Sair</button>
 
@@ -75,7 +75,7 @@ export default function Consultar(){
                 </thead>
 
             {exib == true &&
-            
+
                 <tbody>
                     {listaDiario.map(item => 
 
