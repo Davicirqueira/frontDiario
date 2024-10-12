@@ -3,6 +3,8 @@ import './index.scss';
 
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function Consultar(){
@@ -82,7 +84,7 @@ export default function Consultar(){
                     </tr>
                 </thead>
 
-            {exib == true &&
+            {exib &&
 
                 <tbody>
                     {listaDiario.map(item => 
@@ -93,8 +95,8 @@ export default function Consultar(){
                             <td>{item.conteudo}</td>
                             <td>{item.usuario}</td>
                             <td>
-                                <Link to={`/cadastrar/${item.idDiario}`}>Alterar</Link>
-                                <Link onClick={() => excluir(item.idDiario)}>Deletar</Link>
+                                <Link to={`/cadastrar/${item.idDiario}`}><FontAwesomeIcon icon={faPen} color='#1a2036'/></Link>
+                                <Link className='m' onClick={() => excluir(item.idDiario)}><FontAwesomeIcon icon={faTrash} color='#1a2036'/></Link>
                             </td>
                         </tr>
 

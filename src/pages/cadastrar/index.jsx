@@ -45,6 +45,8 @@ export default function Cadastrar() {
 
         }
 
+        navigate('/consultar');
+
     }
 
     async function consultar(token){
