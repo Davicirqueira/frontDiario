@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './index.scss'
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -81,8 +83,8 @@ export default function Cadastrar() {
     return (
         <div className='pagina-cadastrar'>
 
-            <button><Link to={'/consultar'}>Voltar</Link></button>
-            <h1>{id ? 'EDITAR' : 'CADASTRAR'}</h1>
+            <Link to={'/consultar'}><FontAwesomeIcon icon={faCircleArrowLeft} color='#1a2036' size='2x'/></Link>
+            <h1>{id ? 'EDITAR' : 'CADASTRAR NOTA'} <img src="/diariozinho.png" alt="" /></h1>
 
 
             <div className='form'>
