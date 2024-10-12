@@ -39,10 +39,10 @@ export default function Consultar(){
     //Função onde é obrigatório ter feito o login.
     useEffect(() => {
 
-        let usu = localStorage.getItem('USUARIO')
-        setToken(usu);
+        let token = localStorage.getItem('USUARIO')
+        setToken(token);
 
-        if(usu == undefined){
+        if(token == 'null'){
             navigate('/')
         }
 

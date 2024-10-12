@@ -8,7 +8,7 @@ export default function Login() {
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     async function entrar() {
 
@@ -50,7 +50,7 @@ export default function Login() {
                     id="nome"
                     type="text"
                     value={nome}
-                    onChange={e => setNome(e.target.value)} 
+                    onChange={(e) => setNome(e.target.value)} 
                 />
 
             </div>
@@ -62,7 +62,7 @@ export default function Login() {
                     id="senha"
                     type="text"
                     value={senha}
-                    onChange={e => setSenha(e.target.value)} 
+                    onChange={(e) => setSenha(e.target.value)} 
                 />
 
             </div>

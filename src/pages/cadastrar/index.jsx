@@ -22,7 +22,7 @@ export default function Cadastrar() {
 
         const paramDiario = {
             "dia": dia,
-            "conetudo": conteudo,
+            "conteudo": conteudo,
             "usuario": usuario
         }
 
@@ -45,7 +45,7 @@ export default function Cadastrar() {
 
     }
 
-    async function consultar(){
+    async function consultar(token){
 
         if(id != undefined){
 
@@ -66,14 +66,14 @@ export default function Cadastrar() {
 
     useEffect(() => {
 
-        let usu = localStorage.getItem('USUARIO')
-        setToken(usu)
+        let token = localStorage.getItem('USUARIO')
+        setToken(token)
 
-        if(usu == undefined){
+        if(token == 'null'){
             navigate('/')
         }
 
-        consultar();
+        consultar(token);
 
     }, [])
 
