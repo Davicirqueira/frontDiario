@@ -9,6 +9,7 @@ export default function Consultar(){
 
     const [token, setToken] = useState(null);
     const [listaDiario, setListaDiario] = useState([]);
+    const [exib, setExib] = useState(false)
 
     const navigate = useNavigate();
 
@@ -17,6 +18,8 @@ export default function Consultar(){
         const url = `http://localhost:7000/diario?x-access-token=${token}`;
         let resp = await axios.get(url);
         setListaDiario(resp.data);
+
+        setExib(!exib)
 
     }
 
@@ -57,7 +60,7 @@ export default function Consultar(){
 
             <button onClick={sair}>Sair</button>
 
-            <button onClick={buscar}>Exibir</button>
+            <button onClick={buscar}>{exib ? 'Ocultar' : 'Exibir'}</button>
             <button><Link to={'/cadastrar'}>Cadastrar</Link></button>
 
             <table>
@@ -71,6 +74,8 @@ export default function Consultar(){
                     </tr>
                 </thead>
 
+            {exib == true &&
+            
                 <tbody>
                     {listaDiario.map(item => 
 
@@ -87,6 +92,8 @@ export default function Consultar(){
 
                     )}
                 </tbody>
+            }
+
             </table>
         </div>
 
