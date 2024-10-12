@@ -14,7 +14,7 @@ export default function Cadastrar() {
     const [conteudo, setConteudo] = useState('');
     const [usuario, setUsuario] = useState('');
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const { id } = useParams();
 
@@ -45,18 +45,19 @@ export default function Cadastrar() {
 
     }
 
-    async function buscarDados(){
+    async function consultar(){
 
         if(id != undefined){
 
-            const url = `http://localhost:7000/diario/${id}`;
+            const url = `http://localhost:7000/diario/${id}?x-access-token=${token}`;
             let resp = await axios.get(url);
-            let dados = resp.data;
+            let dados = resp.data
 
             let data = moment(dados.dia).format('YYYY-MM-DD');
+            console.log(data);
 
             setDia(data);
-            setConteudo(dados.conetudo);
+            setConteudo(dados.conteudo);
             setUsuario(dados.usuario);
 
         }
@@ -66,15 +67,13 @@ export default function Cadastrar() {
     useEffect(() => {
 
         let usu = localStorage.getItem('USUARIO')
-        setToken(usu);
+        setToken(usu)
 
         if(usu == undefined){
-
             navigate('/')
-
-            buscarDados();
-
         }
+
+        consultar();
 
     }, [])
 
@@ -89,15 +88,15 @@ export default function Cadastrar() {
             <div className='form'>
                 <div>
                     <label>Dia:</label>
-                    <input type='text' value={dia} onChange={e => setDia(e.target.value)} />
+                    <input type='date' value={dia} onChange={e => setDia(e.target.value)} />
                 </div>
                 <div>
                     <label>Nota:</label>
                     <input type='text' value={conteudo} onChange={e => setConteudo(e.target.value)} />
                 </div>
                 <div>
-                    <label>Seu Nome:</label>
-                    <input type='date' value={usuario} onChange={e => setUsuario(e.target.value)} />
+                    <label>Id usuario:</label>
+                    <input type='text' value={usuario} onChange={e => setUsuario(e.target.value)} />
                 </div>
             </div>
             <button onClick={salvar}> SALVAR </button>

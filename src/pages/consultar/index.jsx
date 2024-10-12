@@ -31,7 +31,7 @@ export default function Consultar(){
 
     async function sair(){
 
-        localStorage.setItem('USUARIO')
+        localStorage.setItem('USUARIO', null)
         navigate('/')
 
     }
@@ -66,7 +66,7 @@ export default function Consultar(){
                         <th>ID</th>
                         <th>Dia</th>
                         <th>Nota</th>
-                        <th>Nome</th>
+                        <th>Usuário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -75,13 +75,13 @@ export default function Consultar(){
                     {listaDiario.map(item => 
 
                         <tr>
-                            <td>{item.id}</td>
-                            <td>{item.dia}</td>
+                            <td>{item.idDiario}</td>
+                            <td>{new Date(item.dia).toLocaleDateString()}</td>
                             <td>{item.conteudo}</td>
                             <td>{item.usuario}</td>
                             <td>
-                                <Link to={`/cadastrar/${item.id}`}>Alterar</Link>
-                                <Link onClick={() => excluir(item.id)}>Deletar</Link>
+                                <Link to={`/cadastrar/${item.idDiario}`}>Alterar</Link>
+                                <Link onClick={() => excluir(item.idDiario)}>Deletar</Link>
                             </td>
                         </tr>
 
