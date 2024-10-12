@@ -1,60 +1,103 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './index.scss'
-
 import moment from 'moment';
 
 import axios from 'axios'
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 export default function Cadastrar() {
-    const [nome, setNome] = useState('');
-    const [motivo, setMotivo] = useState('');
-    const [vinganca, setVinganca] = useState('');
-    const [nota, setNota] = useState('');
-    const [perdoado, setPerdoado] = useState(false);
 
+    const [token, setToken] = useState(null);
+
+    const [dia, setDia] = useState('');
+    const [conteudo, setConteudo] = useState('');
+    const [usuario, setUsuario] = useState('');
+
+    const navigate = useNavigate();
+
+    const { id } = useParams();
 
     async function salvar() {
-        const paramCorpo = {
-            "nome": nome,
-            "motivo": motivo,
-            "vinganca": vinganca,
-            "notaOdio": nota,
-            "perdoado": perdoado
+
+        const paramDiario = {
+            "dia": dia,
+            "conetudo": conteudo,
+            "usuario": usuario
         }
 
-        const url = 'http://localhost:5010/listaNegra';
-        let resp = await axios.post(url, paramCorpo);
+        if(id == undefined){
 
-        alert('Pessoa adicionada na lista negra. Id: ' + resp.data.novoId);
+            const url = `http://localhost:7000/diario?x-access-token=${token}`;
+            let resp = await axios.post(url, paramDiario)
+
+            alert(`Nota adicionada ao diário. id: ${resp.data.idDiario}`);
+
+        }
+        else{
+
+            const url = `http://localhost:7000/diario/${id}?x-access-token=${token}`;
+            let resp = await axios.put(url, paramDiario);
+
+            alert('Nota alterada no diário.');
+
+        }
+
     }
+
+    async function buscarDados(){
+
+        if(id != undefined){
+
+            const url = `http://localhost:7000/diario/${id}`;
+            let resp = await axios.get(url);
+            let dados = resp.data;
+
+            let data = moment(dados.dia).format('YYYY-MM-DD');
+
+            setDia(data);
+            setConteudo(dados.conetudo);
+            setUsuario(dados.usuario);
+
+        }
+
+    }
+
+    useEffect(() => {
+
+        let usu = localStorage.getItem('USUARIO')
+        setToken(usu);
+
+        if(usu == undefined){
+
+            navigate('/')
+
+            buscarDados();
+
+        }
+
+    }, [])
 
 
     return (
         <div className='pagina-cadastrar'>
-            <h1> CADASTRAR </h1>
+
+            <button><Link to={'/consultar'}>Voltar</Link></button>
+            <h1>{id ? 'EDITAR' : 'CADASTRAR'}</h1>
 
 
             <div className='form'>
                 <div>
-                    <label>Nome:</label>
-                    <input type='text' value={nome} onChange={e => setNome(e.target.value)} />
+                    <label>Dia:</label>
+                    <input type='text' value={dia} onChange={e => setDia(e.target.value)} />
                 </div>
                 <div>
-                    <label>Motivo:</label>
-                    <input type='text' value={motivo} onChange={e => setMotivo(e.target.value)} />
+                    <label>Nota:</label>
+                    <input type='text' value={conteudo} onChange={e => setConteudo(e.target.value)} />
                 </div>
                 <div>
-                    <label>Vingança:</label>
-                    <input type='date' value={vinganca} onChange={e => setVinganca(e.target.value)} />
-                </div>
-                <div>
-                    <label>Nota de Ódio</label>
-                    <input type='text' value={nota} onChange={e => setNota(e.target.value)} />
-                </div>
-                <div>
-                    <label>Perdoado:</label>
-                    <input type='checkbox' checked={perdoado} onChange={e => setPerdoado(e.target.checked)} />
+                    <label>Seu Nome:</label>
+                    <input type='date' value={usuario} onChange={e => setUsuario(e.target.value)} />
                 </div>
             </div>
             <button onClick={salvar}> SALVAR </button>
