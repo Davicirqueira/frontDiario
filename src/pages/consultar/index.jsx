@@ -60,9 +60,13 @@ export default function Consultar(){
 
             <section>
 
-            <button onClick={sair}>Sair</button>
+            <div className='bts'>
 
+            <button onClick={sair}>Sair</button>
             <button onClick={buscar}>{exib ? 'Ocultar' : 'Exibir'}</button>
+
+            </div>
+
             <button className='cds'><Link to={'/cadastrar'}>Cadastrar nota</Link></button>
 
             </section>

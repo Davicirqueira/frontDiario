@@ -5,6 +5,26 @@
 
         padding-top: 2%;
 
+        .bts{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;            
+
+            button{
+    
+                background-color: #1a2036;
+                border-style: none;
+                border-radius: 12px;
+                padding: 10px;
+                color: #fff;
+                width: 80px;
+                
+                
+            }
+
+        }
+
+
         .cds{
     
             background-color: #1a2036;
