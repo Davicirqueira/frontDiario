@@ -58,7 +58,7 @@ export default function Consultar(){
 
         <div className='pagina-consultar'>
 
-            <h2>Bem-Vindo {token?.usuario}</h2>
+            <h2>Bem-Vindo {token?.usuario} <img src="/diariozinho.png" alt="" /></h2>
 
             <section>
 

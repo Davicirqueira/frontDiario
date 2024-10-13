@@ -1,16 +1,26 @@
 import { useState } from "react";
 import './index.scss';
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
-export default function Login() {
+export default function CadastrarUsuario(){
 
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    async function entrar() {
+    async function cadastrar(){
+
+        if(nome == '' || senha == ''){
+
+            alert('Preenha todos os campos.')
+            return;
+
+        }
 
         const usuario = {
 
@@ -19,29 +29,24 @@ export default function Login() {
 
         }
 
-        const url = `http://localhost:7000/entrar`
+        const url = `http://localhost:7000/cadastrar`
         let resp = await axios.post(url, usuario);
 
-        if (resp.data.erro != undefined) {
+        let dados = resp.data;
 
-            alert(resp.data.erro);
+        alert(`Cadastro realizado. Id: ${dados.idUsuario}`);
 
-        }
-        else {
-
-            localStorage.setItem('USUARIO', resp.data.token)
-            navigate('/consultar')
-
-        }
-
+        navigate('/')
 
     }
 
-    return (
+    return(
 
-        <div className="pagina-login">
+        <div className="pagina-user">
 
-            <h1>ENTRAR <img src="/diariozinho.png" alt="" /></h1>
+            <Link to={'/'}><FontAwesomeIcon icon={faCircleArrowLeft} color="#1a2036" size="2x"/></Link>
+
+            <h1>FAÇA O SEU CADASTRO  <img src="/diariozinho.png" alt="" /></h1>
 
             <div className="campo">
 
@@ -69,9 +74,7 @@ export default function Login() {
 
             </div>
 
-            <button onClick={entrar}>Entrar</button>
-
-            <p><Link to={'/cadastrarUsuario'}>Cadastre-se em Diários!</Link></p>
+            <button onClick={cadastrar}>Cadastrar</button>
 
         </div>
 
